@@ -1,4 +1,4 @@
-##[Escaneo de seguridad y vulnerabilidades de images de contenedores con OpenShift.](https://github.com/javilinux/conferences/2018/supersec/escaneo)
+## [Escaneo de seguridad y vulnerabilidades de images de contenedores con OpenShift.](https://github.com/javilinux/conferences/tree/master/2018/supersec/escaneo)
 
 En esta presentación hablaremos sobre estrategias para escaneo de seguridad y vulnerabilidades de imagenes de contenedores. 
 ¿Que es lo que hay exactemente dentro de un contenedor? ¿Quién debería ser responsable de su seguridad? ¿Como se asemeja a lo que hacemos con los servidores?
@@ -18,7 +18,7 @@ Red Hat ofrece varias soluciones para entornos de OpenShift:
 3. Cloudforms escanea las imagenes usando OpenSCAP (como Atomic) y también añade capacidades como realizar acciones cuando una imagen es vulnerable, escanear automaticamente nuevas imagenes o incluso hacer informes.
 
 
-##[Aplicación de parches de seguridad sin perdida de servicio en OpenShift](https://github.com/javilinux/conferences/2018/supersec/downtime)
+## [Aplicación de parches de seguridad sin perdida de servicio en OpenShift](https://github.com/javilinux/conferences/tree/master/2018/supersec/downtime)
 
 Uno de los tipicos motivos para el retraso de actualizaciones de seguridad, es la posible perdida de servicio. Incluso cuando se usan contenedores.
 
