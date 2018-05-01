@@ -90,7 +90,95 @@
 |UNKNOWN       | Sin datos suficientes|
 
 ---
+#### Ejemplo de imagen en un catálago
+
+https://access.redhat.com/containers/?tab=overview#/registry.access.redhat.com/openshift3/ose-sti-builder
+
+---
+#### Atomic CLI
+- Con origen en el proyecto [Atomic](https://www.projectatomic.io/)
+- Usa OpenScan
+- Se puede instalar en Fedora/Centos
+
+
+---
+#### Atomic CLI
+- Instalar el paquete
+```
+dnf install atomic -y
+```
+- Determinar la imagen a escanear
+```
+REPOSITORY                                              TAG                 IMAGE ID            CREATED             SIZE
+registry.access.redhat.com/openshift3/ose-sti-builder   v3.8.37-2           db2cc45d44f2        5 days ago          1.25 GB
+registry.access.redhat.com/openshift3/ose-sti-builder   latest              9d5f7d2b5e54        10 days ago         1.23 GB
+registry.access.redhat.com/openshift3/ose-sti-builder   v3.9.25             9d5f7d2b5e54        10 days ago         1.23 GB
+registry.access.redhat.com/openshift3/ose-sti-builder   v3.1.1.6-9          a456510b78b0        2 years ago         442 MB
+```
+
+
+---
+#### Atomic CLI
+```
+ jaramire  ~  sudo atomic scan registry.access.redhat.com/openshift3/ose-sti-builder
+docker run -t --rm -v /etc/localtime:/etc/localtime -v /run/atomic/2018-04-30-19-47-45-806899:/scanin -v /var/lib/atomic/openscap/2018-04-30-19-47-45-806899:/scanout:rw,Z -v /etc/oscapd:/etc/oscapd:ro registry.access.redhat.com/rhel7/openscap oscapd-evaluate scan --no-standard-compliance --targets chroots-in-dir:///scanin --output /scanout -j1
+
+registry.access.redhat.com/openshift3/ose-sti-builder (9d5f7d2b5e54667)
+
+registry.access.redhat.com/openshift3/ose-sti-builder passed the scan
+
+Files associated with this scan are in /var/lib/atomic/openscap/2018-04-30-19-47-45-806899.
+
+```
+
+---
+#### Atomic CLI
+
+```
+docker run -t --rm -v /etc/localtime:/etc/localtime -v /run/atomic/2018-04-30-19-49-42-085980:/scanin -v /var/lib/atomic/openscap/2018-04-30-19-49-42-085980:/scanout:rw,Z -v /etc/oscapd:/etc/oscapd:ro registry.access.redhat.com/rhel7/openscap oscapd-evaluate scan --no-standard-compliance --targets chroots-in-dir:///scanin --output /scanout -j1
+
+registry.access.redhat.com/openshift3/ose-sti-builder:v3.1.1.6-9 (a456510b78b00c0)
+
+The following issues were found:
+
+     RHSA-2018:0260: systemd security update (Moderate)
+     Severity: Moderate
+       RHSA URL: https://access.redhat.com/errata/RHSA-2018:0260
+       RHSA ID: RHSA-2018:0260-01
+       Associated CVEs:
+           CVE ID: CVE-2018-1049
+           CVE URL: https://access.redhat.com/security/cve/CVE-2018-1049
+
+     RHSA-2017:3263: curl security update (Moderate)
+     Severity: Moderate
+       RHSA URL: https://access.redhat.com/errata/RHSA-2017:3263
+       RHSA ID: RHSA-2017:3263-01
+       Associated CVEs:
+           CVE ID: CVE-2017-1000257
+           CVE URL: https://access.redhat.com/security/cve/CVE-2017-1000257
+...
+```
+---
+#### Atomic CLI
+
+- Se puede combinar con otras herramientas e incluirlo en los procesos de CI/CD
+
+
+---
+#### Escaneo de Imagenes con Cloudforms
+- Configuramos Cloudforms
+   - Configuración del Token
+   - Añadir OpenShift como proveedor en Cloudforms
+   - Ajustar el "Node Selector"
+---
+#### Escaneo de Imagenes con Cloudforms
+- Configurar la politica de control y cumplimiento.
+- La configuración por defecto hace que si una vulnerabilidad es detectada ese contenedor no se ejecuta.
+- Se puede configurar para que simplemente las reporte.
+---
 ###### More Information
+Fedora Atomic
+
 [Ten layers of containers security](https://www.redhat.com/cms/managed-files/cl-container-security-openshift-cloud-devops-tech-detail-f7530kc-201705-en.pdf)
 
 
