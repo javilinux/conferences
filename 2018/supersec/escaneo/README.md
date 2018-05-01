@@ -66,7 +66,7 @@
 #### Clasificación de las erratas de seguridad
 |Clasificación|Descripcion|
 |-------------|-------------|
-|Critica|Facilmente explotables de manera remota, sin autenticación y que pueden comprometer el sistemamediante la ejecución de código arbritario|
+|Crítica|Facilmente explotables de manera remota, sin autenticación y que pueden comprometer el sistemamediante la ejecución de código arbritario|
 |Importante|Permiten a usuarios locales que obtengan privilegios de administrador, permiten a usuarios remotos no autenticados ver recursos, permiten usuarios remotos autenticados ejecutar código arbitrario o una denegación de servicio.|
 
 ---
@@ -80,17 +80,17 @@
 ##### Calificación de la seguridad de las imagenes
 | Calificación | Condiciones de seguridad                                        |
 |--------------|--------------------------|
-|A             | No tiene erratas de seguridad Criticas o Importantes sin aplicar|
-|B             | Afectada por una errata de seguridad Critica (7 dias) o Importante (30 dias)|
-|C             | Afectada por una errata de seguridad Critica (30 dias) o Importante (90 dias)|
+|A             | No tiene erratas de seguridad Críticas o Importantes sin aplicar|
+|B             | Afectada por una errata de seguridad Crítica (7 días) o Importante (30 días)|
+|C             | Afectada por una errata de seguridad Crítica (30 días) o Importante (90 días)|
 
 ---
 ##### Calificación de la seguridad de las imagenes
 | Calificación | Condiciones de seguridad                                        |
 |--------------|--------------------------|
-|D             | Afectada por una errata de seguridad Critica (90 dias) o Importante (1 año)|
-|E             | Afectada por una errata de seguridad Critica o Importante (1 año)|
-|F             | Afectada por una errata de seguridad Critica o Importante (más de 1 año)|
+|D             | Afectada por una errata de seguridad Crítica (90 dias) o Importante (1 año)|
+|E             | Afectada por una errata de seguridad Crítica o Importante (1 año)|
+|F             | Afectada por una errata de seguridad Crítica o Importante (más de 1 año)|
 |UNKNOWN       | Sin datos suficientes|
 
 ---
@@ -102,13 +102,14 @@ https://access.redhat.com/containers/?tab=overview#/registry.access.redhat.com/o
 #### Atomic CLI
 - Con origen en el proyecto [Atomic](https://www.projectatomic.io/)
 - Usa OpenScan
-- Se puede instalar en Fedora/Centos
+- Se puede instalar en Fedora/CentOS
 
 
 ---
 #### Atomic CLI
 - Instalar el paquete
-```
+
+```sh
 dnf install atomic -y
 ```
 - Determinar la imagen a escanear
@@ -123,7 +124,8 @@ registry.access.redhat.com/openshift3/ose-sti-builder   v3.1.1.6-9          a456
 
 ---
 #### Atomic CLI
-```
+
+```sh
  jaramire  ~  sudo atomic scan registry.access.redhat.com/openshift3/ose-sti-builder
 docker run -t --rm -v /etc/localtime:/etc/localtime -v /run/atomic/2018-04-30-19-47-45-806899:/scanin -v /var/lib/atomic/openscap/2018-04-30-19-47-45-806899:/scanout:rw,Z -v /etc/oscapd:/etc/oscapd:ro registry.access.redhat.com/rhel7/openscap oscapd-evaluate scan --no-standard-compliance --targets chroots-in-dir:///scanin --output /scanout -j1
 
@@ -138,7 +140,7 @@ Files associated with this scan are in /var/lib/atomic/openscap/2018-04-30-19-47
 ---
 #### Atomic CLI
 
-```
+```sh
 docker run -t --rm -v /etc/localtime:/etc/localtime -v /run/atomic/2018-04-30-19-49-42-085980:/scanin -v /var/lib/atomic/openscap/2018-04-30-19-49-42-085980:/scanout:rw,Z -v /etc/oscapd:/etc/oscapd:ro registry.access.redhat.com/rhel7/openscap oscapd-evaluate scan --no-standard-compliance --targets chroots-in-dir:///scanin --output /scanout -j1
 
 registry.access.redhat.com/openshift3/ose-sti-builder:v3.1.1.6-9 (a456510b78b00c0)
