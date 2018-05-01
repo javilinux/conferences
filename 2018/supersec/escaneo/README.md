@@ -173,14 +173,50 @@ The following issues were found:
 ---
 #### Escaneo de Imagenes con Cloudforms
 - Configurar la politica de control y cumplimiento.
-- La configuración por defecto hace que si una vulnerabilidad es detectada ese contenedor no se ejecuta.
-- Se puede configurar para que simplemente las reporte.
+![cfme_policy](images/cfme_policy_1.png)
+
+---
+#### Escaneo de Imagenes con Cloudforms
+
+![cfme_policy2](images/cfme_policy_2.png)
+
 
 
 ---
 #### Escaneo de Imagenes con Cloudforms
 
-![cfme_policy](images/cfme_policy_1.png)
+![ose_nodejs_1](images/ose_nodejs_1.png)
+
+---
+#### Escaneo de Imagenes con Cloudforms
+
+![cfe_image_2](images/cfme_image_2.png)
+
+---
+#### Informes con Cloudforms
+
+![cfe_report_10](images/cfme_report_10.png)
+
+---
+#### Informes con Cloudforms
+
+![cfe_report_11](images/cfme_report_11.png)
+
+---
+#### Informes con Cloudforms
+
+![cfe_report_12](images/cfme_report_12.png)
+
+---
+#### detalles con OpenScap 
+
+![cfe_report_7](images/cfme_report_7.png)
+
+---
+#### detalles con OpenScap 
+
+![cfe_report_9](images/cfme_report_9.png)
+
 ---
 ###### More Information
 Fedora Atomic
