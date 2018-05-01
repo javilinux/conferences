@@ -175,6 +175,12 @@ The following issues were found:
 - Configurar la politica de control y cumplimiento.
 - La configuración por defecto hace que si una vulnerabilidad es detectada ese contenedor no se ejecuta.
 - Se puede configurar para que simplemente las reporte.
+
+
+---
+#### Escaneo de Imagenes con Cloudforms
+
+![cfme_policy](images/cfme_policy_1.png)
 ---
 ###### More Information
 Fedora Atomic
