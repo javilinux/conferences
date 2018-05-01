@@ -4,6 +4,10 @@
 
 *OpenShift Support at Red Hat*
 
+*twitter.com/javilinux*
+
+*javilinux@gmail.com*
+
 ---
 
 ### Disclaimer
@@ -232,11 +236,29 @@ The following issues were found:
    - Notificar vulnerabilidades
    - Nuevas vulnerabilidades en escaneos anteriores
 
+---
+## Resumen 
+
+##### Catalago de Contenedores
+##### Atomic CLI + OpenSCAP
+##### Cloudforms + OpenSCAP + OpenShift
 
 ---
-###### More Information
-Fedora Atomic
+## ¿Preguntas?
+
+- *twitter.com/javilinux*
+- *javilinux@gmail.com*
+
+---
+###### Mas información
+[Proyecto Atomic](https://www.projectatomic.io/)
+
+[Introducción al escaneo con Atomic Cli](https://developers.redhat.com/blog/2016/05/02/introducing-atomic-scan-container-vulnerability-detection/)
+
+[Openshift](https://www.openshift.org/)
+
+[OpenScap](https://www.open-scap.org/)
+
+[manageiq](http://manageiq.org/)
 
 [Ten layers of containers security](https://www.redhat.com/cms/managed-files/cl-container-security-openshift-cloud-devops-tech-detail-f7530kc-201705-en.pdf)
-
-
