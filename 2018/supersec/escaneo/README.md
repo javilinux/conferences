@@ -166,21 +166,19 @@ The following issues were found:
 
 ---
 #### Escaneo de Imagenes con Cloudforms
-- Configuramos Cloudforms
+- Configuramos iniciales en Cloudforms
    - Configuración del Token
    - Añadir OpenShift como proveedor en Cloudforms
    - Ajustar el "Node Selector"
+
 ---
 #### Escaneo de Imagenes con Cloudforms
-- Configurar la politica de control y cumplimiento.
 ![cfme_policy](images/cfme_policy_1.png)
 
 ---
 #### Escaneo de Imagenes con Cloudforms
 
 ![cfme_policy2](images/cfme_policy_2.png)
-
-
 
 ---
 #### Escaneo de Imagenes con Cloudforms
@@ -216,6 +214,24 @@ The following issues were found:
 #### detalles con OpenScap 
 
 ![cfe_report_9](images/cfme_report_9.png)
+
+---
+#### Escaneo de las aplicaciones
+
+- Tanto RHEL/CentOS como OpenShift (CI/CD) permiten escaneos en tiempo real:
+   - OpenSCAP
+   - Aqua Security
+   - Black Duck Hub
+   - JFrog Xray
+   - Twistlock
+
+---
+#### Escaneo de las aplicaciones
+- Los escaneres permiten:
+   - Catalogar las aplicaciones
+   - Notificar vulnerabilidades
+   - Nuevas vulnerabilidades en escaneos anteriores
+
 
 ---
 ###### More Information
