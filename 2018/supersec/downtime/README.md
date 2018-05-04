@@ -20,12 +20,14 @@
 
 #### Introducción
  
-En esta charla veremos las distintas estrategias de despliegue que podemos utilizar en OpenShift:
-* Recreate
-* Rolling
-* Custom
-* Blue-Green
-* A/B
+En esta charla veremos las distintas estrategias de despliegue que podemos utilizar en OpenShift y cual de ellas nos puede ayudar a actualizar sin downtime:
+* Basadas en configuración:
+   * Recreate
+   * Rolling
+   * Custom
+* Basadas en rutas:   
+   * Blue-Green
+   * A/B
 
 ---
 
@@ -37,7 +39,7 @@ En esta charla veremos las distintas estrategias de despliegue que podemos utili
 
 ---
 
-#### Recreate
+#### Estrategia Recreate
 
 - Remueve las instancias antiguas y crea nuevas.
 - Soporta hooks.
@@ -54,7 +56,7 @@ En esta charla veremos las distintas estrategias de despliegue que podemos utili
 
 ---
 
-#### Recreate demo
+#### Entorno demo
 
 - Nos bajamos el cliente de OpenShift.
 ```
@@ -66,11 +68,18 @@ oc cluster up
 minishift start
 ```
 
+---
+#### Demo recreate
+
 ```
 oc new-project recreatedemo
 oc create -f recreatedemo.yaml
 oc tag deployment-example:v2 deployment-example:latest && oc logs -f dc/deployment-example
 ```
+---
+#### Conclusion recreate
+
+##### No evita la perdida de servicio.
 
 ---
 #### Rolling
@@ -95,6 +104,11 @@ oc new-project rollingdemo
 oc create -f rollingdemo.yaml
 oc tag deployment-example:v2 deployment-example:latest && oc logs -f dc/deployment-example
 ```
+---
+## Conclusion Rolling
+
+- *Puede evitar la perdida de servicio.*
+- *Convivencia de 2 versiones distintas simultaneamente.*
 
 ---
 #### Estrategia custom
@@ -123,3 +137,57 @@ oc create -f customdemo.yaml
 oc tag deployment-example:v2 deployment-example:latest && oc logs -f dc/deployment-example
 ```
 
+---
+#### Conclusion estrategia custom.
+
+*Puede evitar la perdida de servicio.*
+
+---
+#### Estrategia Blue-Green
+
+- Simplemente se cambia la ruta para que apunte al servicio de la nueva versión.
+
+---
+#### Demo estrategia Blue-Green
+```
+oc new-app openshift/deployment-example:v1 --name=example-green
+oc new-app openshift/deployment-example:v2 --name=example-blue
+oc expose svc/example-green --name=bluegreen-example
+oc patch route/bluegreen-example -p '{"spec":{"to":{"name":"example-blue"}}}'
+```
+
+---
+#### Conclusion estrategia Blue-Green.
+
+- *Puede evitar la perdida de servicio.*
+- *Fácil vuelta atrás.*
+
+---
+
+#### Estrategia A/B
+
+- Se puede distribuir la carga entre distintas versiones.
+
+---
+#### Demo estrategia A/B
+```
+oc new-project ab
+oc new-app openshift/deployment-example:v1 --name=ab-example-a
+oc new-app openshift/deployment-example:v2 --name=ab-example-b
+oc expose svc/ab-example-a --name=web
+oc set route-backends web ab-example-a=1 ab-example-b=9
+for i in `seq 100` ; do curl -s web-ab.192.168.42.204.nip.io | grep div ; done
+```
+
+---
+#### Conclusion estrategia A/B
+- *Puede evitar la perdia de servicio.*
+- *Permite pruebas de varias versiones simultaneas.*
+- *Fácil vuelta atrás.*
+
+
+---
+
+TODO:
+Mas informacion
+- httpress ?
