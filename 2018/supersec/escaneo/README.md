@@ -6,6 +6,8 @@
 
 *twitter.com/javilinux*
 
+*github.com/javilinux/conferences/2018/supersec*
+
 *javilinux@gmail.com*
 
 ---
@@ -13,6 +15,7 @@
 ### Disclaimer
 
 *Opiniones propias*
+
 *Versiones upstream y cuenta de developer*
 
 ---
@@ -26,7 +29,7 @@
 
 ###### ¿Que es lo que hay exactemente dentro de un contenedor? 
 
-* Formatos de empaquetado: Docker es la más popular pera hay otras, cćomo CRI-O o rkt.
+* Formatos de empaquetado: Docker es la más popular pera hay otras, como CRI-O o rkt.
 * Son inmutables y como tal estan basados en imagenes.
 * Las imagenes de contenedores estan basadas en capas (base, runtime. aplicación)
 
@@ -38,7 +41,7 @@
 * Los contenedores no tienen contenido, son en realidad, solo procesos.
 
 ---
-###### ¿Como se asemeja a lo que hacemos con los servidores?
+###### ¿Como se asemeja/diferencia a lo que hacemos con los servidores?
 
 * Técnología muy reciente.
 * Falta de herramientas.
@@ -46,12 +49,13 @@
 * Los equipos de seguridad con frequencia no entienden de contenedores.
 * Los equipos de desarrollo/operaciones no entienden de seguridad.
 * La seguridad puede impactar la productividad.
+
 ---
 ###### Catálogo de Contenedores 
 - Red Hat ofrece un catálogo de todas las imagenes que proporciona.
 - Son frecuentemente escaneadas y actualizadas.
 - Historial de cada imagen y un tag por cada versión.
-- Las imagenes son calificadas de la A a la F.
+- Las imagenes son calificadas de la A a la F en función de las erratas.
 
 ---
 #### Introducion a las erratas
@@ -66,14 +70,16 @@
 #### Clasificación de las erratas de seguridad
 |Clasificación|Descripcion|
 |-------------|-------------|
-|Crítica|Facilmente explotables de manera remota, sin autenticación y que pueden comprometer el sistemamediante la ejecución de código arbritario|
-|Importante|Permiten a usuarios locales que obtengan privilegios de administrador, permiten a usuarios remotos no autenticados ver recursos, permiten usuarios remotos autenticados ejecutar código arbitrario o una denegación de servicio.|
+|Crítica   | - Ejecución de código arbitrario, remotamente y sin autenticación |
+|Importante| - Escalación de privilegios localmente|
+|          | - Acceso a recursos a invitados remotos|
+|          | - Denegación servicio o ejecución código arbitrario a usuarios remotos.|
 
 ---
 #### Clasificación de las erratas de seguridad
 |Clasificación|Descripcion|
 |-------------|-------------|
-|Moderada| Dificilmente explotables pero que en determinadas circunstancias pueden comprometer el sistema.|
+|Moderada| - Sólo explotables en determinadas circunstancias.|
 |Baja|Resto de erratas de seguridad.|
 
 ---
