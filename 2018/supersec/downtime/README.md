@@ -4,9 +4,6 @@
 
 *OpenShift Support at Red Hat*
 
-*twitter.com/javilinux*
-
-*javilinux@gmail.com*
 
 ---
 
@@ -20,7 +17,7 @@
 
 #### Introducción
  
-En esta charla veremos las distintas estrategias de despliegue que podemos utilizar en OpenShift y cual de ellas nos puede ayudar a actualizar sin downtime:
+Estrategias de despliegue en OpenShift:
 * Basadas en configuración:
    * Recreate
    * Rolling
@@ -48,11 +45,11 @@ En esta charla veremos las distintas estrategias de despliegue que podemos utili
 
 #### Flujo de la estrategia recreate
 
-1. Ejecuta el pre- hook.
+1. Ejecuta el pre-hook.
 2. Escala a 0 la versión antigua.
-3. Ejeucta el mid- hook.
+3. Ejeucta el mid-hook.
 4. Escala la nueva versión.
-5. Ejecuta el post- hook.
+5. Ejecuta el post-hook.
 
 ---
 
@@ -187,7 +184,13 @@ for i in `seq 100` ; do curl -s web-ab.192.168.42.204.nip.io | grep div ; done
 
 
 ---
+### ¿Preguntas?
 
-TODO:
-Mas informacion
-- httpress ?
+*twitter.com/javilinux*
+
+*javilinux@gmail.com*
+
+---
+
+### Más Información
+
