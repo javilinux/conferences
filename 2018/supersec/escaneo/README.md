@@ -4,12 +4,6 @@
 
 *OpenShift Support at Red Hat*
 
-*twitter.com/javilinux*
-
-*github.com/javilinux/conferences/2018/supersec*
-
-*javilinux@gmail.com*
-
 ---
 
 ### Disclaimer
@@ -19,7 +13,9 @@
 *Versiones upstream y cuenta de developer*
 
 ---
+## Agenda
 
+<!-- .slide: style="text-align: left;"> -->  
 #### Introducción
 #### Catalago de Contenedores
 #### Atomic CLI + OpenSCAP
@@ -29,74 +25,87 @@
 
 ###### ¿Que es lo que hay exactemente dentro de un contenedor? 
 
-* Formatos de empaquetado: Docker es la más popular pera hay otras, como CRI-O o rkt.
-* Son inmutables y como tal estan basados en imagenes.
-* Las imagenes de contenedores estan basadas en capas (base, runtime. aplicación)
+* Formatos de empaquetado: 
+    * Docker / CRI-O / rkt.
+* Inmutables basados en imagenes.
+* Las imagenes estan basadas en capas
+    * base, runtime, aplicación.
+
+Note: CRI-O is an implementation of the Kubernetes CRI (Container Runtime Interface) to enable using OCI (Open Container Initiative) 
 
 ---
 
 ###### ¿Quién debería ser responsable de su seguridad? 
 
-* Requieren responsabilidad compartida entre los equipos de desarollo y los de operaciones.
-* Los contenedores no tienen contenido, son en realidad, solo procesos.
+* Responsabilidad compartida - DevOps.
+* Los contenedores no tienen contenido, son sólo procesos.
 
 ---
 ###### ¿Como se asemeja/diferencia a lo que hacemos con los servidores?
 
-* Técnología muy reciente.
-* Falta de herramientas.
-* Mucha velocidad de evolución. 
-* Los equipos de seguridad con frequencia no entienden de contenedores.
-* Los equipos de desarrollo/operaciones no entienden de seguridad.
-* La seguridad puede impactar la productividad.
+1. Técnología muy reciente.
+2. Falta de herramientas.
+3. Mucha velocidad de evolución. 
+4. Seguridad no entiende de contenedores.
+5. DevOPs no entienden de seguridad.
+6. La seguridad puede impactar la productividad.
 
 ---
 ###### Catálogo de Contenedores 
+
 - Red Hat ofrece un catálogo de todas las imagenes que proporciona.
 - Son frecuentemente escaneadas y actualizadas.
 - Historial de cada imagen y un tag por cada versión.
-- Las imagenes son calificadas de la A a la F en función de las erratas.
+- Calificación A - F en función de las erratas.
 
 ---
 #### Introducion a las erratas
 
-- Una errata es un conjunto de parches liberados al mismo tiempo.
-- Hay erratas de varios tipos:
+- Errata: conjunto de parches liberados al mismo tiempo.
    - RHBA: Bug (Solución de problemas) 
    - RHEA: Enhancements (Mejoras de productos)
    - RHSA: Security advisories (Seguridad)
 
 ---
 #### Clasificación de las erratas de seguridad
-|Clasificación|Descripcion|
-|-------------|-------------|
-|Crítica   | - Ejecución de código arbitrario, remotamente y sin autenticación |
-|Importante| - Escalación de privilegios localmente|
-|          | - Acceso a recursos a invitados remotos|
-|          | - Denegación servicio o ejecución código arbitrario a usuarios remotos.|
+*Crítica*
+
+- Ejecución de código arbitrario, remotamente y sin autenticación
+
+*Importante*
+
+- Escalación de privilegios localmente
+
+- Acceso a recursos a invitados remotos
+
+- Denegación servicio o ejecución código arbitrario a usuarios remotos
 
 ---
 #### Clasificación de las erratas de seguridad
-|Clasificación|Descripcion|
-|-------------|-------------|
-|Moderada| - Sólo explotables en determinadas circunstancias.|
-|Baja|Resto de erratas de seguridad.|
+
+*Moderada*
+
+- Sólo explotables en determinadas circunstancias.
+
+*Baja*
+
+Resto de erratas de seguridad.
 
 ---
 ##### Calificación de la seguridad de las imagenes
 | Calificación | Condiciones de seguridad                                        |
 |--------------|--------------------------|
-|A             | No tiene erratas de seguridad Críticas o Importantes sin aplicar|
-|B             | Afectada por una errata de seguridad Crítica (7 días) o Importante (30 días)|
-|C             | Afectada por una errata de seguridad Crítica (30 días) o Importante (90 días)|
+|A             | Sin Críticas o Importantes sin aplicar|
+|B             | Crítica (7 días) o Importante (30 días)|
+|C             | Crítica (30 días) o Importante (90 días)|
 
 ---
 ##### Calificación de la seguridad de las imagenes
 | Calificación | Condiciones de seguridad                                        |
 |--------------|--------------------------|
-|D             | Afectada por una errata de seguridad Crítica (90 dias) o Importante (1 año)|
-|E             | Afectada por una errata de seguridad Crítica o Importante (1 año)|
-|F             | Afectada por una errata de seguridad Crítica o Importante (más de 1 año)|
+|D             | Crítica (90 dias) o Importante (1 año)|
+|E             | Crítica o Importante (1 año)|
+|F             | Crítica o Importante (más de 1 año)|
 |UNKNOWN       | Sin datos suficientes|
 
 ---
@@ -109,7 +118,6 @@ https://access.redhat.com/containers/?tab=overview#/registry.access.redhat.com/o
 - Con origen en el proyecto [Atomic](https://www.projectatomic.io/)
 - Usa OpenScan
 - Se puede instalar en Fedora/CentOS
-
 
 ---
 #### Atomic CLI
@@ -127,6 +135,7 @@ registry.access.redhat.com/openshift3/ose-sti-builder   v3.9.25             9d5f
 registry.access.redhat.com/openshift3/ose-sti-builder   v3.1.1.6-9          a456510b78b0        2 years ago         442 MB
 ```
 
+Note: sudo atomic images list
 
 ---
 #### Atomic CLI
@@ -182,25 +191,36 @@ The following issues were found:
    - Configuración del Token
    - Añadir OpenShift como proveedor en Cloudforms
    - Ajustar el "Node Selector"
+   - Etcétera, Etcétera.
 
 ---
-#### Escaneo de Imagenes con Cloudforms
+#### Creación Política de escaneo
 ![cfme_policy](images/cfme_policy_1.png)
 
 ---
-#### Escaneo de Imagenes con Cloudforms
+#### Acciones a realizar 
 
 ![cfme_policy2](images/cfme_policy_2.png)
 
 ---
-#### Escaneo de Imagenes con Cloudforms
+#### Acciones a realizar 
+
+![cfme_policy3](images/cfme_policy_3.png)
+
+---
+#### Nuevo Despliegue
 
 ![ose_nodejs_1](images/ose_nodejs_1.png)
 
 ---
-#### Escaneo de Imagenes con Cloudforms
+#### Información nuevo contenedor
 
 ![cfe_image_2](images/cfme_image_2.png)
+
+---
+#### Información nuevo contenedor
+
+![cfe_image_3](images/cfme_image_3.png)
 
 ---
 #### Informes con Cloudforms
@@ -208,14 +228,21 @@ The following issues were found:
 ![cfe_report_10](images/cfme_report_10.png)
 
 ---
-#### Informes con Cloudforms
+#### Reglas Informes
 
 ![cfe_report_11](images/cfme_report_11.png)
 
 ---
-#### Informes con Cloudforms
+#### Resultados Informes
 
 ![cfe_report_12](images/cfme_report_12.png)
+
+---
+#### Detalles Informes
+
+![cfe_report_13](images/cfme_report_13.png)
+
+![cfe_report_14](images/cfme_report_14.png)
 
 ---
 #### detalles con OpenScap 
@@ -230,7 +257,7 @@ The following issues were found:
 ---
 #### Escaneo de las aplicaciones
 
-- Tanto RHEL/CentOS como OpenShift (CI/CD) permiten escaneos en tiempo real:
+- RHEL/CentOS u OpenShift (CI/CD) permiten escaneos en tiempo real:
    - OpenSCAP
    - Aqua Security
    - Black Duck Hub
@@ -247,18 +274,22 @@ The following issues were found:
 ---
 ## Resumen 
 
+<!-- .slide: style="text-align: left;"> -->  
 ##### Catalago de Contenedores
 ##### Atomic CLI + OpenSCAP
 ##### Cloudforms + OpenSCAP + OpenShift
 
 ---
 ## ¿Preguntas?
+<!-- .slide: style="text-align: left;"> -->  
 
 - *twitter.com/javilinux*
 - *javilinux@gmail.com*
+- *github.com/javilinux/conferences/2018/supersec*
 
 ---
 ###### Mas información
+<!-- .slide: style="text-align: left;"> -->  
 [Proyecto Atomic](https://www.projectatomic.io/)
 
 [Introducción al escaneo con Atomic Cli](https://developers.redhat.com/blog/2016/05/02/introducing-atomic-scan-container-vulnerability-detection/)
