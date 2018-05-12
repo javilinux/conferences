@@ -165,7 +165,7 @@ oc patch route/bluegreen-example -p '{"spec":{"to":{"name":"example-blue"}}}'
 
 #### Estrategia A/B
 
-Distribuir la carga entre distintas versiones mediante rutas.
+Distribuir la carga mediante rutas.
 
 ---
 #### Demo estrategia A/B
@@ -175,7 +175,7 @@ oc new-app openshift/deployment-example:v1 --name=ab-example-a
 oc new-app openshift/deployment-example:v2 --name=ab-example-b
 oc expose svc/ab-example-a --name=web
 oc set route-backends web ab-example-a=1 ab-example-b=9
-for i in `seq 100` ; do curl -s web-ab.192.168.42.204.nip.io | grep div ; done
+for i in `seq 100` ; do curl -s web-ab.127.0.0.1.nip.io | grep div ; done
 ```
 
 ---
