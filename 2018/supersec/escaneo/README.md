@@ -1,4 +1,6 @@
-### [Escaneo de seguridad y vulnerabilidades de images de contenedores con OpenShift.](https://github.com/javilinux/conferences/tree/master/2018/supersec/escaneo)
+### [Escaneo de seguridad y vulnerabilidades de contenedores con OpenShift.](https://github.com/javilinux/conferences/tree/master/2018/supersec/escaneo)
+
+*SuperSec 2018 Almería*
 
 *Javier Ramirez Molina*
 
@@ -85,7 +87,7 @@ Note: CRI-O is an implementation of the Kubernetes CRI (Container Runtime Interf
 
 *Moderada*
 
-- Sólo explotables en determinadas circunstancias.
+Sólo explotables en determinadas circunstancias.
 
 *Baja*
 
@@ -120,13 +122,15 @@ https://access.redhat.com/containers/?tab=overview#/registry.access.redhat.com/o
 - Se puede instalar en Fedora/CentOS
 
 ---
-#### Atomic CLI
+#### Instalar Atomic CLI
+<!-- .slide: style="text-align: left;"> -->  
 - Instalar el paquete
 
 ```sh
 dnf install atomic -y
 ```
 - Determinar la imagen a escanear
+<small>
 ```
 REPOSITORY                                              TAG                 IMAGE ID            CREATED             SIZE
 registry.access.redhat.com/openshift3/ose-sti-builder   v3.8.37-2           db2cc45d44f2        5 days ago          1.25 GB
@@ -134,12 +138,14 @@ registry.access.redhat.com/openshift3/ose-sti-builder   latest              9d5f
 registry.access.redhat.com/openshift3/ose-sti-builder   v3.9.25             9d5f7d2b5e54        10 days ago         1.23 GB
 registry.access.redhat.com/openshift3/ose-sti-builder   v3.1.1.6-9          a456510b78b0        2 years ago         442 MB
 ```
+</small>
 
 Note: sudo atomic images list
 
 ---
-#### Atomic CLI
+#### Escaneo con Atomic CLI
 
+<small>
 ```sh
  jaramire  ~  sudo atomic scan registry.access.redhat.com/openshift3/ose-sti-builder
 docker run -t --rm -v /etc/localtime:/etc/localtime -v /run/atomic/2018-04-30-19-47-45-806899:/scanin -v /var/lib/atomic/openscap/2018-04-30-19-47-45-806899:/scanout:rw,Z -v /etc/oscapd:/etc/oscapd:ro registry.access.redhat.com/rhel7/openscap oscapd-evaluate scan --no-standard-compliance --targets chroots-in-dir:///scanin --output /scanout -j1
@@ -151,10 +157,10 @@ registry.access.redhat.com/openshift3/ose-sti-builder passed the scan
 Files associated with this scan are in /var/lib/atomic/openscap/2018-04-30-19-47-45-806899.
 
 ```
-
+</small>
 ---
-#### Atomic CLI
-
+#### Escaneo con Atomic CLI
+<small>
 ```sh
 docker run -t --rm -v /etc/localtime:/etc/localtime -v /run/atomic/2018-04-30-19-49-42-085980:/scanin -v /var/lib/atomic/openscap/2018-04-30-19-49-42-085980:/scanout:rw,Z -v /etc/oscapd:/etc/oscapd:ro registry.access.redhat.com/rhel7/openscap oscapd-evaluate scan --no-standard-compliance --targets chroots-in-dir:///scanin --output /scanout -j1
 
@@ -179,11 +185,12 @@ The following issues were found:
            CVE URL: https://access.redhat.com/security/cve/CVE-2017-1000257
 ...
 ```
+</small>
+
 ---
 #### Atomic CLI
-
-- Se puede combinar con otras herramientas e incluirlo en los procesos de CI/CD
-
+<!-- .slide: style="text-align: left;"> -->  
+Se puede combinar con otras herramientas e incluirlo en los procesos de CI/CD
 
 ---
 #### Escaneo de Imagenes con Cloudforms
@@ -220,7 +227,7 @@ The following issues were found:
 ---
 #### Información nuevo contenedor
 
-![cfe_image_3](images/cfme_image_3.png)
+<img src="images/cfme_image_3.png" alt="drawing" style="width: 1000px;height: 200px"/>
 
 ---
 #### Informes con Cloudforms
@@ -240,9 +247,7 @@ The following issues were found:
 ---
 #### Detalles Informes
 
-![cfe_report_13](images/cfme_report_13.png)
-
-![cfe_report_14](images/cfme_report_14.png)
+<img src="images/cfme_report_14.png" alt="drawing" style="width: 500px;height: 200px"/>
 
 ---
 #### detalles con OpenScap 
