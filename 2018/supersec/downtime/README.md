@@ -35,7 +35,7 @@ Estrategias de despliegue en OpenShift:
 - Docker (CRI-O), Kubernetes, Etcd, haproxy...
 - Origin es la version upstream.
 
---- 
+---
 
 #### Entorno demo
 
@@ -44,7 +44,6 @@ Estrategias de despliegue en OpenShift:
 oc cluster up
 ```
 - O con Minishift:
-
 ```
 minishift start
 ```
@@ -78,7 +77,7 @@ oc tag deployment-example:v2 deployment-example:latest && oc logs -f dc/deployme
 ---
 #### Conclusion recreate
 
-##### No evita la perdida de servicio.
+*No evita la perdida de servicio.*
 
 ---
 #### Rolling
@@ -144,11 +143,12 @@ oc tag deployment-example:v2 deployment-example:latest && oc logs -f dc/deployme
 ---
 #### Estrategia Blue-Green
 
-- Simplemente se cambia la ruta para que apunte al servicio de la nueva versión.
+Cambiamos la ruta para que apunte al nuevo servicio.
 
 ---
 #### Demo estrategia Blue-Green
 ```
+oc new-project bluegreen
 oc new-app openshift/deployment-example:v1 --name=example-green
 oc new-app openshift/deployment-example:v2 --name=example-blue
 oc expose svc/example-green --name=bluegreen-example
@@ -165,7 +165,7 @@ oc patch route/bluegreen-example -p '{"spec":{"to":{"name":"example-blue"}}}'
 
 #### Estrategia A/B
 
-- Se puede distribuir la carga entre distintas versiones.
+Distribuir la carga entre distintas versiones mediante rutas.
 
 ---
 #### Demo estrategia A/B
@@ -196,8 +196,12 @@ for i in `seq 100` ; do curl -s web-ab.192.168.42.204.nip.io | grep div ; done
 
 ### Más Información
 
+[OpenShift](https://www.openshift.org)
 
-TODO:
-- Mas información
-- Video?
-- Instrucciones
+[Oc cluster up](https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md)
+
+[Minishift](https://www.openshift.org/minishift/)
+
+[OpenShift Deployment Strategies](https://docs.openshift.org/latest/dev_guide/deployments/deployment_strategies.html)
+
+[OpenShift Advanced Deployment Strategies](https://docs.openshift.org/latest/dev_guide/deployments/advanced_deployment_strategies.html#advanced-deployment-strategies-blue-green-deployments)
