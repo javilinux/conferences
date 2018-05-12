@@ -4,6 +4,7 @@
 
 *OpenShift Support at Red Hat*
 
+*SuperSec 2018 Almería*
 
 ---
 
@@ -22,7 +23,7 @@ Estrategias de despliegue en OpenShift:
    * Recreate
    * Rolling
    * Custom
-* Basadas en rutas:   
+* Basadas en rutas:
    * Blue-Green
    * A/B
 
@@ -33,6 +34,20 @@ Estrategias de despliegue en OpenShift:
 - Plataforma como servicio.
 - Docker (CRI-O), Kubernetes, Etcd, haproxy...
 - Origin es la version upstream.
+
+--- 
+
+#### Entorno demo
+
+- Nos bajamos el cliente de OpenShift.
+```
+oc cluster up
+```
+- O con Minishift:
+
+```
+minishift start
+```
 
 ---
 
@@ -53,19 +68,6 @@ Estrategias de despliegue en OpenShift:
 
 ---
 
-#### Entorno demo
-
-- Nos bajamos el cliente de OpenShift.
-```
-oc cluster up
-```
-- O con Minishift:
-
-```
-minishift start
-```
-
----
 #### Demo recreate
 
 ```
@@ -194,3 +196,8 @@ for i in `seq 100` ; do curl -s web-ab.192.168.42.204.nip.io | grep div ; done
 
 ### Más Información
 
+
+TODO:
+- Mas información
+- Video?
+- Instrucciones
