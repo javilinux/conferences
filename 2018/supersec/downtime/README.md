@@ -8,6 +8,30 @@
 
 ---
 
+### Más Información
+
+https://github.com/javilinux/conferences/2018/supersec/downtime
+
+<small>
+[OpenShift](https://www.openshift.org)
+
+[Oc cluster up](https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md)
+
+[Minishift](https://www.openshift.org/minishift/)
+
+[OpenShift Deployment Strategies](https://docs.openshift.org/latest/dev_guide/deployments/deployment_strategies.html)
+
+[OpenShift Advanced Deployment Strategies](https://docs.openshift.org/latest/dev_guide/deployments/advanced_deployment_strategies.html#advanced-deployment-strategies-blue-green-deployments)
+
+[Learn OpenShift](https://learn.openshift.com/)
+
+[OpenShift for Developers](https://www.openshift.com/for-developers/)
+[DevOps with OpenShift](https://www.openshift.com/devops-with-openshift/)
+[Deploying to OpenShift](https://blog.openshift.com/deploying-to-openshift-our-latest-free-ebook/)
+</small>
+
+---
+
 ### Disclaimer
 
 *Opiniones propias*
@@ -17,8 +41,14 @@
 ---
 
 #### Introducción
- 
-Estrategias de despliegue en OpenShift:
+
+- Vulnerabilidad encontrada en un contenedor.
+- Nuevo despliegue sin perdida de servicio en OpenShift.
+
+---
+
+#### Estrategias de despliegue en OpenShift
+
 * Basadas en configuración:
    * Recreate
    * Rolling
@@ -49,13 +79,24 @@ minishift start
 ```
 
 ---
+#### Entorno demo
+
+- Aplicación deployment-example:
+https://github.com/openshift/origin/tree/master/examples/deployment
+
+- Usaré ficheros yaml con los distintos componentes:
+   - Servicios
+   - Imagen
+   - Configuración de despliegue
+
+---
 
 #### Estrategia Recreate
 
-- Remueve las instancias antiguas y crea nuevas.
+- Remueve instancias antiguas y crea nuevas.
 - Soporta hooks.
 
----
+----
 
 #### Flujo de la estrategia recreate
 
@@ -65,7 +106,7 @@ minishift start
 4. Escala la nueva versión.
 5. Ejecuta el post-hook.
 
----
+----
 
 #### Demo recreate
 
@@ -77,15 +118,15 @@ oc tag deployment-example:v2 deployment-example:latest && oc logs -f dc/deployme
 ---
 #### Conclusion recreate
 
-*No evita la perdida de servicio.*
+*No evita la pérdida de servicio.*
 
 ---
 #### Rolling
 
-- Poco a poco va reemplazando instancias con la version antigua con instancias de la nueva version.
-- Se hacen comprobaciones de las nuevas instancias antes de echar abajo las viejas.
+- Reemplaza poco a poco las insntancias.
+- Se hacen comprobaciones antes de reemplazar.
 
----
+----
 #### Flujo de la estrategia Rolling
 
 1. Se ejecutan los pre- hook.
@@ -94,7 +135,7 @@ oc tag deployment-example:v2 deployment-example:latest && oc logs -f dc/deployme
 4. Se repite el proceso hasta que se estan ejecutando el número deseado de replicas nuevas y no existen replicas viejas.
 5. Se ejecutan los post- hook. 
 
----
+----
 #### Rolling demo
 
 ```
@@ -126,7 +167,7 @@ customParams:
           echo Finished
 ```
 
----
+----
 #### Demo estrategia custom
 
 ```
@@ -145,7 +186,7 @@ oc tag deployment-example:v2 deployment-example:latest && oc logs -f dc/deployme
 
 Cambiamos la ruta para que apunte al nuevo servicio.
 
----
+----
 #### Demo estrategia Blue-Green
 ```
 oc new-project bluegreen
@@ -167,7 +208,7 @@ oc patch route/bluegreen-example -p '{"spec":{"to":{"name":"example-blue"}}}'
 
 Distribuir la carga mediante rutas.
 
----
+----
 #### Demo estrategia A/B
 ```
 oc new-project ab
@@ -192,16 +233,3 @@ for i in `seq 100` ; do curl -s web-ab.127.0.0.1.nip.io | grep div ; done
 
 *javilinux@gmail.com*
 
----
-
-### Más Información
-
-[OpenShift](https://www.openshift.org)
-
-[Oc cluster up](https://github.com/openshift/origin/blob/master/docs/cluster_up_down.md)
-
-[Minishift](https://www.openshift.org/minishift/)
-
-[OpenShift Deployment Strategies](https://docs.openshift.org/latest/dev_guide/deployments/deployment_strategies.html)
-
-[OpenShift Advanced Deployment Strategies](https://docs.openshift.org/latest/dev_guide/deployments/advanced_deployment_strategies.html#advanced-deployment-strategies-blue-green-deployments)
