@@ -8,6 +8,14 @@
 
 ---
 
+### Disclaimer
+
+*Opiniones propias*
+
+*Versiones upstream y cuenta de developer*
+
+---
+
 ### Más Información
 
 https://github.com/javilinux/conferences/2018/supersec/downtime
@@ -22,21 +30,18 @@ https://github.com/javilinux/conferences/2018/supersec/downtime
 [OpenShift Deployment Strategies](https://docs.openshift.org/latest/dev_guide/deployments/deployment_strategies.html)
 
 [OpenShift Advanced Deployment Strategies](https://docs.openshift.org/latest/dev_guide/deployments/advanced_deployment_strategies.html#advanced-deployment-strategies-blue-green-deployments)
+</small>
+
+---
+### Formación 
 
 [Learn OpenShift](https://learn.openshift.com/)
 
 [OpenShift for Developers](https://www.openshift.com/for-developers/)
+
 [DevOps with OpenShift](https://www.openshift.com/devops-with-openshift/)
+
 [Deploying to OpenShift](https://blog.openshift.com/deploying-to-openshift-our-latest-free-ebook/)
-</small>
-
----
-
-### Disclaimer
-
-*Opiniones propias*
-
-*Versiones upstream y cuenta de developer*
 
 ---
 
@@ -79,7 +84,7 @@ minishift start
 ```
 
 ---
-#### Entorno demo
+#### Aplicación demo
 
 - Aplicación deployment-example:
 https://github.com/openshift/origin/tree/master/examples/deployment
@@ -209,7 +214,9 @@ oc patch route/bluegreen-example -p '{"spec":{"to":{"name":"example-blue"}}}'
 Distribuir la carga mediante rutas.
 
 ----
+
 #### Demo estrategia A/B
+
 ```
 oc new-project ab
 oc new-app openshift/deployment-example:v1 --name=ab-example-a
@@ -217,14 +224,15 @@ oc new-app openshift/deployment-example:v2 --name=ab-example-b
 oc expose svc/ab-example-a --name=web
 oc set route-backends web ab-example-a=1 ab-example-b=9
 for i in `seq 100` ; do curl -s web-ab.127.0.0.1.nip.io | grep div ; done
+
 ```
 
 ---
+
 #### Conclusion estrategia A/B
 - *Puede evitar la perdia de servicio.*
 - *Permite pruebas de varias versiones simultaneas.*
 - *Fácil vuelta atrás.*
-
 
 ---
 ### ¿Preguntas?
@@ -232,4 +240,3 @@ for i in `seq 100` ; do curl -s web-ab.127.0.0.1.nip.io | grep div ; done
 *twitter.com/javilinux*
 
 *javilinux@gmail.com*
-
