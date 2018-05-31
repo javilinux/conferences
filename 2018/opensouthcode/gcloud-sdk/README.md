@@ -67,7 +67,17 @@
 - Installer for Windows
 - Tar.gz for OSX and other Linux
 - Requires python 2
-- Or use cloud shell
+
+---
+## Cloud shell
+
+- Temporary g1-small
+- Web browser
+- Built-in code editor BETA
+- 5 GB of persistent disk storage
+- Pre-installed Google Cloud SDK and other tools
+- Language support for Java, Go, Python, Node.js, PHP, Ruby and .NET
+- Built-in authorization
 
 ---
 ### Initialization
@@ -85,21 +95,25 @@ gclod config configurations
 
 ```sh
 export GCE_PROJECT=jotb18-openshift
-export GCE_EMAIL=jotb-304@jotb18-openshift.iam.gserviceaccount.com
-export GCE_CREDENTIALS_FILE_PATH=/home/jaramire/Downloads/jotb18-openshift-a7b630842800.json
-gcloud auth activate-service-account jotb-304@jotb18-openshift.iam.gserviceaccount.com --key-file=/home/jaramire/Downloads/jotb18-openshift-a7b630842800.json
+export GCE_EMAIL=jotb-304@jotb18-openshift.....
+export GCE_CREDENTIALS_FILE_PATH=$path_file.json
+gcloud auth activate-service-account jotb-304@.... /
+--key-file=$path_file.json
 ```
 
 ---
 ### Project init
 - Link to Billing Account
-- Crate project / set default project
+- Create project / set default project
 
 ---
 ### Create an instance
 
 ```sh
-gcloud compute instances create instance1 --image-family centos-7 --image-project centos-cloud --machine-type g1-small --tags default-allow-http,default-allow-https,openshift-console
+gcloud compute instances create instance1 \
+--image-family centos-7 --image-project centos-cloud \
+--machine-type g1-small \ 
+--tags default-allow-http,default-allow-https,openshift-console
 ```
 ```sh
 gcloud compute images list
@@ -116,11 +130,81 @@ gcloud compute instances start/stop/delete $instance_name
 ```
 
 ---
+### SSH key
+- Specific formatting:
+```sh
+[USERNAME_2]:ssh-rsa [EXISTING_KEY_VALUE_2] [USERNAME_2]
+[USERNAME_3]:ssh-rsa [NEW_KEY_VALUE] [USERNAME_3]
+```
+- They can be set at project level
+```sh
+gcloud compute project-info add-metadata --metadata-from-file ssh-keys=[LIST_PATH]
+```
+- They can be set per instance
+```sh
+gcloud compute instances add-metadata [INSTANCE_NAME] \
+--metadata-from-file ssh-keys=[LIST_PATH]
+```
+- We can block ssh in specific instances
+```sh
+gcloud compute instances add-metadata [INSTANCE_NAME] \
+--metadata block-project-ssh-keys=TRUE
+```
+---
+### Serial port
+```sh
+gcloud compute instances add-metadata [INSTANCE_NAME]  \
+    --metadata=serial-port-enable=1
+gcloud compute connect-to-serial-port [INSTANCE_NAME]
+```
+
+---
+### Firewall rules
+```sh
+gcloud compute firewall-rules create openshift-console \
+--allow tcp:8443 --description "Allow incoming traffic on TCP port 8443" \ 
+--direction INGRESS --target-tags openshift-console
+
+gcloud compute firewall-rules create default-allow-http \
+--allow tcp:80 --description "Allow incoming traffic on TCP port 80" \
+--direction INGRESS --target-tags default-allow-http
+
+gcloud compute firewall-rules create default-allow-https \
+--allow tcp:443 --description "Allow incoming traffic on TCP port 443" \
+--direction INGRESS --target-tags default-allow-https
+```
+
+---
+### Create image
+```sh
+gcloud compute images create centos7oc \
+--source-disk=instance1
+
+gcloud compute instances create chiquito --image centos7oc \
+--image-project jotb18-openshift --machine-type g1-small \
+--tags default-allow-http,default-allow-https,openshift-console
+```
+
+---
+### Metadata
+```sh
+gcloud compute instances add-metadata lab-0$i \
+--metadata-from-file startup-script=foo.sh
+
+gcloud compute instances add-metadata lab-0$i \
+--metadata startup-script=/root/start_cluster.sh
+
+gcloud compute instances remove-metadata \
+--keys=startup-script lab-0$i 
+```
+
+---
 ### Gcloud scripting
 - Disable prompts (--quiet)
 - Handling ouput (--filter , --format)
 ```sh
-gcloud compute instances list --format='table(name:sort=1, EXTERNAL_IP, status)'
+gcloud compute instances list \
+--format='table(name:sort=1, EXTERNAL_IP, status)'
 ```
 
 ---
@@ -136,58 +220,28 @@ do
 done
 ```
 
-```sh
-for i in `seq -w 0 23` ; do gcloud compute instances add-metadata lab-0$i --metadata-from-file startup-script=foo.sh ; done
-```
-
----
-### Create image
-```sh
-gcloud compute images create centos7oc --source-disk=instance1
-gcloud compute instances create chiquito --image centos7oc --image-project jotb18-openshift --machine-type g1-small --tags default-allow-http,default-allow-https,openshift-console
-```
-
----
-### Metadata
-```sh
-gcloud compute instances add-metadata lab-0$i --metadata-from-file startup-script=foo.sh
-gcloud compute instances remove-metadata --keys=startup-script lab-0$i 
-gcloud compute instances add-metadata lab-0$i --metadata startup-script=/root/start_cluster.sh
-```
-
----
-### DNS
-```sh
-gcloud dns record-sets transaction start -z=espetos-net
-gcloud dns record-sets transaction add -z=espetos-net --name="instance2.espetos.net." --type=A --ttl="300" "35.189.124.139"
-gcloud dns record-sets transaction add -z=espetos-net --name="instance3.espetos.net." --type=A --ttl="300" "35.230.135.245"
-gcloud dns record-sets transaction add -z=espetos-net --name="instance4.espetos.net." --type=A --ttl="300" "35.197.226.185"
-gcloud dns record-sets transaction add -z=espetos-net --name="instance5.espetos.net." --type=A --ttl="300" "35.197.226.185"
-gcloud dns record-sets transaction execute -z=espetos-net
-```
-
----
-### Firewall rules
-```sh
-gcloud compute firewall-rules create openshift-console --allow tcp:8443 --description "Allow incoming traffic on TCP port 8443" --direction INGRESS --target-tags openshift-console
-gcloud compute firewall-rules create default-allow-http --allow tcp:80 --description "Allow incoming traffic on TCP port 80" --direction INGRESS --target-tags default-allow-http
-gcloud compute firewall-rules create default-allow-https --allow tcp:443 --description "Allow incoming traffic on TCP port 443" --direction INGRESS --target-tags default-allow-https
-```
-
 ---
 ### External IPs
+- By default they are ephemeral IPs
+- You can reserve static IP addresses:
+
+<small>
 ```sh
 gcloud compute addresses create $name
-gcloud compute instances create [INSTANCE_NAME] --address [IP_ADDRESS]
-gcloud compute instances add-access-config [INSTANCE_NAME] \
-    --access-config-name "[ACCESS_CONFIG_NAME]" --address [IP_ADDRESS]
-```
 
---- 
+gcloud compute instances create [INSTANCE_NAME] --address [IP_ADDRESS]
+
+gcloud compute instances add-access-config [INSTANCE_NAME] --access-config-name [ACCESS_CONFIG_NAME] --address [IP_ADDRESS]
+```
+</small>
+
+
+---
 ### Quotas
 ```sh
 gcloud compute project-info describe --project jotb18-openshift
 ```
+
 - You can't edit them, you request them to be edited.
 - Free tier has some restrictions
 
@@ -201,20 +255,26 @@ gcloud compute project-info describe --project jotb18-openshift
     - Inventory plugin - Ansible dynamic inventory.
 
 ---
-### SSH key Project Level
-```sh
-[USERNAME_2]:ssh-rsa [EXISTING_KEY_VALUE_2] [USERNAME_2]
-[USERNAME_3]:ssh-rsa [NEW_KEY_VALUE] [USERNAME_3]
-gcloud compute project-info add-metadata --metadata-from-file ssh-keys=[LIST_PATH]
-gcloud compute instances add-metadata [INSTANCE_NAME] --metadata-from-file ssh-keys=[LIST_PATH]
-```
-
----
 ### API oc cluster up
+
+<small>
 ```sh
 oc cluster up --public-hostname=$(curl -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip)
 ```
+</small>
 
+---
+### DNS
+<small>
+```sh
+gcloud dns record-sets transaction start -z=espetos-net
+gcloud dns record-sets transaction add -z=espetos-net --name="instance2.espetos.net." --type=A --ttl="300" "35.189.124.139"
+gcloud dns record-sets transaction add -z=espetos-net --name="instance3.espetos.net." --type=A --ttl="300" "35.230.135.245"
+gcloud dns record-sets transaction add -z=espetos-net --name="instance4.espetos.net." --type=A --ttl="300" "35.197.226.185"
+gcloud dns record-sets transaction add -z=espetos-net --name="instance5.espetos.net." --type=A --ttl="300" "35.197.226.185"
+gcloud dns record-sets transaction execute -z=espetos-net
+```
+</small>
 ---
 ### THANK YOU!
 
