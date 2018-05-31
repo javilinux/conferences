@@ -136,35 +136,60 @@ done
 for i in `seq -w 0 23` ; do gcloud compute instances add-metadata lab-0$i --metadata-from-file startup-script=foo.sh ; done
 ```
 ---
-### Crear una imagen
-
+### Create image
+```sh
+gcloud compute images create centos7oc --source-disk=instance1
+gcloud compute instances create chiquito --image centos7oc --image-project jotb18-openshift --machine-type g1-small --tags default-allow-http,default-allow-https,openshift-console
+```
 ---
 ### Metadata
-
+```sh
+gcloud compute instances add-metadata lab-0$i --metadata-from-file startup-script=foo.sh
+gcloud compute instances remove-metadata --keys=startup-script lab-0$i 
+gcloud compute instances add-metadata lab-0$i --metadata startup-script=/root/start_cluster.sh
+```
 ---
 ### DNS
-
+```sh
+gcloud dns record-sets transaction start -z=espetos-net
+gcloud dns record-sets transaction add -z=espetos-net --name="instance2.espetos.net." --type=A --ttl="300" "35.189.124.139"
+gcloud dns record-sets transaction add -z=espetos-net --name="instance3.espetos.net." --type=A --ttl="300" "35.230.135.245"
+gcloud dns record-sets transaction add -z=espetos-net --name="instance4.espetos.net." --type=A --ttl="300" "35.197.226.185"
+gcloud dns record-sets transaction add -z=espetos-net --name="instance5.espetos.net." --type=A --ttl="300" "35.197.226.185"
+gcloud dns record-sets transaction execute -z=espetos-net
+```
 ---
 ### Firewall rules
-
+```sh
+gcloud compute firewall-rules create openshift-console --allow tcp:8443 --description "Allow incoming traffic on TCP port 8443" --direction INGRESS --target-tags openshift-console
+gcloud compute firewall-rules create default-allow-http --allow tcp:80 --description "Allow incoming traffic on TCP port 80" --direction INGRESS --target-tags default-allow-http
+gcloud compute firewall-rules create default-allow-https --allow tcp:443 --description "Allow incoming traffic on TCP port 443" --direction INGRESS --target-tags default-allow-https
+```
 ---
 ### IPs
-
----
-### Preguntas?
-
----
-### Tipos de maquina
-
+```sh
+gcloud compute addresses create $name
+gcloud compute instances create [INSTANCE_NAME] --address [IP_ADDRESS]
+gcloud compute instances add-access-config [INSTANCE_NAME] \
+    --access-config-name "[ACCESS_CONFIG_NAME]" --address [IP_ADDRESS]
+```
 --- 
 ### Quotas
-
+```sh
+gcloud compute project-info describe --project jotb18-openshift
+```
+- You can't edit them, you request them to be edited.
+- Free tier has some restrictions
 ---
-### Scripting
-
----
-### Uso con ansible
+### Ansible Module
+- 
 
 ---
 ### SSH key
+
+---
+### API oc cluster up
+
+---
+### Preguntas?
 
