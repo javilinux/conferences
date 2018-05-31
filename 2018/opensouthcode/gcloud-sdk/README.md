@@ -6,6 +6,8 @@
 
 *OpenSouthcode 2018*
 
+![opensouthcode logo](opensouthcodelogo.jpg)
+
 ---
 #### Google Cloud Products
 
@@ -87,31 +89,32 @@ export GCE_EMAIL=jotb-304@jotb18-openshift.iam.gserviceaccount.com
 export GCE_CREDENTIALS_FILE_PATH=/home/jaramire/Downloads/jotb18-openshift-a7b630842800.json
 gcloud auth activate-service-account jotb-304@jotb18-openshift.iam.gserviceaccount.com --key-file=/home/jaramire/Downloads/jotb18-openshift-a7b630842800.json
 ```
+
 ---
 ### Project init
 - Link to Billing Account
 - Crate project / set default project
 
 ---
-
 ### Create an instance
 
 ```sh
 gcloud compute instances create instance1 --image-family centos-7 --image-project centos-cloud --machine-type g1-small --tags default-allow-http,default-allow-https,openshift-console
 ```
-
 ```sh
- gcloud compute images list
+gcloud compute images list
 ```
 ```sh
 gcloud compute machine-types list
 ```
+
 ---
 ### Operate an instance
 
 ```sh
 gcloud compute instances start/stop/delete $instance_name
 ```
+
 ---
 ### Gcloud scripting
 - Disable prompts (--quiet)
@@ -119,6 +122,7 @@ gcloud compute instances start/stop/delete $instance_name
 ```sh
 gcloud compute instances list --format='table(name:sort=1, EXTERNAL_IP, status)'
 ```
+
 ---
 ### Bash scripting
 ```sh
@@ -135,12 +139,14 @@ done
 ```sh
 for i in `seq -w 0 23` ; do gcloud compute instances add-metadata lab-0$i --metadata-from-file startup-script=foo.sh ; done
 ```
+
 ---
 ### Create image
 ```sh
 gcloud compute images create centos7oc --source-disk=instance1
 gcloud compute instances create chiquito --image centos7oc --image-project jotb18-openshift --machine-type g1-small --tags default-allow-http,default-allow-https,openshift-console
 ```
+
 ---
 ### Metadata
 ```sh
@@ -148,6 +154,7 @@ gcloud compute instances add-metadata lab-0$i --metadata-from-file startup-scrip
 gcloud compute instances remove-metadata --keys=startup-script lab-0$i 
 gcloud compute instances add-metadata lab-0$i --metadata startup-script=/root/start_cluster.sh
 ```
+
 ---
 ### DNS
 ```sh
@@ -158,6 +165,7 @@ gcloud dns record-sets transaction add -z=espetos-net --name="instance4.espetos.
 gcloud dns record-sets transaction add -z=espetos-net --name="instance5.espetos.net." --type=A --ttl="300" "35.197.226.185"
 gcloud dns record-sets transaction execute -z=espetos-net
 ```
+
 ---
 ### Firewall rules
 ```sh
@@ -165,14 +173,16 @@ gcloud compute firewall-rules create openshift-console --allow tcp:8443 --descri
 gcloud compute firewall-rules create default-allow-http --allow tcp:80 --description "Allow incoming traffic on TCP port 80" --direction INGRESS --target-tags default-allow-http
 gcloud compute firewall-rules create default-allow-https --allow tcp:443 --description "Allow incoming traffic on TCP port 443" --direction INGRESS --target-tags default-allow-https
 ```
+
 ---
-### IPs
+### External IPs
 ```sh
 gcloud compute addresses create $name
 gcloud compute instances create [INSTANCE_NAME] --address [IP_ADDRESS]
 gcloud compute instances add-access-config [INSTANCE_NAME] \
     --access-config-name "[ACCESS_CONFIG_NAME]" --address [IP_ADDRESS]
 ```
+
 --- 
 ### Quotas
 ```sh
@@ -180,16 +190,34 @@ gcloud compute project-info describe --project jotb18-openshift
 ```
 - You can't edit them, you request them to be edited.
 - Free tier has some restrictions
----
-### Ansible Module
-- 
 
 ---
-### SSH key
+### Ansible Module
+- https://docs.ansible.com/ansible/2.4/guide_gce.html
+    - Creating instances
+    - Controlling network access
+    - Working with persistent disks
+    - Managing load balancers
+    - Inventory plugin - Ansible dynamic inventory.
+
+---
+### SSH key Project Level
+```sh
+[USERNAME_2]:ssh-rsa [EXISTING_KEY_VALUE_2] [USERNAME_2]
+[USERNAME_3]:ssh-rsa [NEW_KEY_VALUE] [USERNAME_3]
+gcloud compute project-info add-metadata --metadata-from-file ssh-keys=[LIST_PATH]
+gcloud compute instances add-metadata [INSTANCE_NAME] --metadata-from-file ssh-keys=[LIST_PATH]
+```
 
 ---
 ### API oc cluster up
+```sh
+oc cluster up --public-hostname=$(curl -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/instance/network-interfaces/0/access-configs/0/external-ip)
+```
 
 ---
-### Preguntas?
+### THANK YOU!
 
+- Questions?
+- @javilinux
+- javilinux@gmail.com
