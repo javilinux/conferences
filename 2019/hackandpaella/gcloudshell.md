@@ -2,31 +2,56 @@
 
 *Javier Ramirez Molina*
 
-*OpenShift Support at Red Hat*
-
 *HackAndPaella February 2019*
+
+---
+<!-- .slide: data-background="./paella.jpg" -->
 
 ---
 #### Topics
 
-- Description
-- Tutorials
+- Overview
 - Limits
-- Web preview
 - Session
+- Web preview
 - Opening a github repo
 - Boost Mode
+- Customization
+- Tutorials
 
 ---
-## Cloud shell
+## Overview 1/2
 
-- Temporary g1-small
-- Web browser
+- Temporary g1-small for free
+- Web browser based (gcloud ssh)
 - Built-in code editor BETA
 - 5 GB of persistent disk storage
-- Pre-installed Google Cloud SDK and other tools
+- Pre-installed SDK and Built-in authorization for Google Cloud
+
+---
+## Overview 2/2
+
 - Language support for Java, Go, Python, Node.js, PHP, Ruby and .NET
-- Built-in authorization
+- Other tools installed: kubectl, docker, mysql, wget, git, pip, npm, tmux...
+- Web preview
+- Boost Mode
+- Customizations
+
+---
+<!-- .slide: data-background="./free.jpg" -->
+
+---
+## Limits
+
+- only $HOME is persistent
+- Terminates after 1 hour of inactivatiy
+- $HOME deleted after 120 days if not accessed
+- 60 hours of weekly usage
+
+---
+## Session
+[![Open in Cloud Shell](open-btn.png)](https://console.cloud.google.com/cloudshell/editor?&shellonly=true)
+
 
 ---
 ### THANK YOU!
