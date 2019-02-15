@@ -3,7 +3,14 @@
 ## Syntax
 
 Markdown
-```<code snippet>```
+
+```
+<code snippet>
+```
+<walkthrough-spotlight-pointer spotlightId="devshell-web-preview-button"
+                               text="Web Preview button">
+</walkthrough-spotlight-pointer>
+
 
 ### Part 1
 
