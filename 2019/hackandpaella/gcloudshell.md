@@ -14,10 +14,9 @@
 - Limits
 - Session
 - Web preview
-- Opening a repository
+- Opening a repository 
 - Boost Mode
 - Customization
-- Tutorials
 
 ---
 ## Overview 1/2
@@ -34,6 +33,7 @@
 - Language support for Java, Go, Python, Node.js, PHP, Ruby and .NET
 - Other tools installed: kubectl, docker, mysql, wget, git, pip, npm, tmux...
 - Web preview
+- Opening repositories / tutorials
 - Boost Mode
 - Customizations
 
