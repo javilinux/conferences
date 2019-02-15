@@ -4,9 +4,10 @@
 
 Markdown
 
+```bash
+echo "Hello Cloud Shell"
 ```
-<code snippet>
-```
+
 <walkthrough-spotlight-pointer spotlightId="devshell-web-preview-button"
                                text="Web Preview button">
 </walkthrough-spotlight-pointer>
