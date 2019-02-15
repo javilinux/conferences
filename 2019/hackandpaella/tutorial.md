@@ -32,7 +32,7 @@ Markdown
 
 - `walkthrough cloud-shell-editor-icon`
 
-<walkthrough-editor-open-file filePath="tutorial.md"
+<walkthrough-editor-open-file filePath="./conferences/2019/hackandpaella/tutorial.md"
                               text="Open sample file">
 </walkthrough-editor-open-file>
 
