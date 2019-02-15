@@ -26,8 +26,10 @@ Markdown
 
 ## Icons
 
-`walkthrough cloud-shell-icon`	Cloud Shell Icon
-`walkthrough web-preview-icon`	Web Preview Icon
-`walkthrough cloud-shell-editor-icon`
+- `walkthrough cloud-shell-icon`
+
+- `walkthrough web-preview-icon`
+
+- `walkthrough cloud-shell-editor-icon`
 
 Done!
