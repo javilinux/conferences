@@ -14,7 +14,7 @@
 - Limits
 - Session
 - Web preview
-- Opening a github repo
+- Opening a repository
 - Boost Mode
 - Customization
 - Tutorials
@@ -43,7 +43,7 @@
 ---
 ## Limits
 
-- only $HOME is persistent
+- Only $HOME is persistent
 - Terminates after 1 hour of inactivatiy
 - $HOME deleted after 120 days if not accessed
 - 60 hours of weekly usage
@@ -52,6 +52,24 @@
 ## Session
 [![Open in Cloud Shell](open-btn.png)](https://console.cloud.google.com/cloudshell/editor?&shellonly=true)
 
+```bash
+gcloud alpha cloud-shell ssh
+```
+
+---
+## Web preview
+
+- Any port from 2000 to 65000
+- Require authentication... 
+- ngrok to the rescue
+
+---
+## Opening a repository
+
+- Github and bitbucket supported
+- Parameters: repo, branch, working directory...
+
+[![Open in Cloud Shell](open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fjavilinux%2Fconferences&cloudshell_working_dir=2019%2Fhackandpaella%2F&cloudshell_tutorial=tutorial.md)
 
 ---
 ### THANK YOU!
