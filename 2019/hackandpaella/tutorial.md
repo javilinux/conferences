@@ -32,4 +32,8 @@ Markdown
 
 - `walkthrough cloud-shell-editor-icon`
 
+<walkthrough-editor-open-file filePath="tutorial.md"
+                              text="Open sample file">
+</walkthrough-editor-open-file>
+
 Done!
