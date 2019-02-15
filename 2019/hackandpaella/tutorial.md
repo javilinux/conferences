@@ -23,6 +23,11 @@ Markdown
                               text="Edit Menu">
 </walkthrough-editor-spotlight>
 
+<walkthrough-tutorial-duration duration="2">
+</walkthrough-tutorial-duration>
+
+<walkthrough-footnote footnote="My footnote">
+</walkthrough-footnote>
 
 ## Icons
 
@@ -39,11 +44,6 @@ Markdown
 ## More
 
 
-<walkthrough-tutorial-duration duration="2">
-</walkthrough-tutorial-duration>
-
-<walkthrough-footnote footnote="My footnote">
-</walkthrough-footnote>
 
 <walkthrough-conclusion-trophy></walkthrough-conclusion-trophy>
 
