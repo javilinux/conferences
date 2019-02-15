@@ -11,17 +11,9 @@ Markdown
                                text="Web Preview button">
 </walkthrough-spotlight-pointer>
 
-<walkthrough-spotlight-pointer spotlightId="devshell-activate-button"
-                               text="Activate button">
-</walkthrough-spotlight-pointer>
-
 <walkthrough-spotlight-pointer spotlightId="devshell-web-editor-button"
                                text="Web Editor button">
 </walkthrough-spotlight-pointer>
-
-<walkthrough-editor-spotlight spotlightId="navigator" filePath="tutorial.md"
-                              text="Navigator">
-</walkthrough-editor-spotlight>
 
 <walkthrough-editor-spotlight spotlightId="fileMenu" filePath="tutorial.md"
                               text="File Menu">
@@ -30,14 +22,12 @@ Markdown
 <walkthrough-editor-spotlight spotlightId="editMenu" filePath="tutorial.md"
                               text="Edit Menu">
 </walkthrough-editor-spotlight>
-### Part 1
 
-Part One Instructions.
 
-### Part 2
+## Icons
 
-Part Two Instructions.
-
-## Conclusion
+`walkthrough cloud-shell-icon`	Cloud Shell Icon
+`walkthrough web-preview-icon`	Web Preview Icon
+`walkthrough cloud-shell-editor-icon`
 
 Done!
