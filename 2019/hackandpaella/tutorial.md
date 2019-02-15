@@ -42,11 +42,7 @@ echo "Hello Cloud Shell"
                               text="Open sample file">
 </walkthrough-editor-open-file>
 
-## More
-
-
+## Finish
 
 <walkthrough-conclusion-trophy></walkthrough-conclusion-trophy>
 
-
-Done!
