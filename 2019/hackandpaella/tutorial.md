@@ -36,4 +36,16 @@ Markdown
                               text="Open sample file">
 </walkthrough-editor-open-file>
 
+## More
+
+
+<walkthrough-tutorial-duration duration="2">
+</walkthrough-tutorial-duration>
+
+<walkthrough-footnote footnote="My footnote">
+</walkthrough-footnote>
+
+<walkthrough-conclusion-trophy></walkthrough-conclusion-trophy>
+
+
 Done!
