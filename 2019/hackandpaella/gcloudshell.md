@@ -16,7 +16,7 @@
 - Web preview
 - Opening a repository 
 - Boost Mode
-- Customization
+- Custom Image
 
 ---
 ## Overview 1/2
@@ -64,12 +64,25 @@ gcloud alpha cloud-shell ssh
 - ngrok to the rescue
 
 ---
-## Opening a repository
+## Opening repositories / tutorials
 
 - Github and bitbucket supported
 - Parameters: repo, branch, working directory...
 
 [![Open in Cloud Shell](open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fjavilinux%2Fconferences&cloudshell_working_dir=2019%2Fhackandpaella%2F&cloudshell_tutorial=tutorial.md)
+
+---
+## Boost Mode
+
+- For 24h
+- Normal - g1-small - 0.5 vCPU, 1.70GB
+- Boost Mode - n1-standard-1 - 1 vCPU, 3.75GB
+
+---
+## Custom Image
+
+- Using a custom image from google container registry
+- Editing the Dockerfile
 
 ---
 ### THANK YOU!
