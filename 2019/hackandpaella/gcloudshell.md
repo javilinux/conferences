@@ -18,6 +18,7 @@
 ---
 ## Overview 1/2
 
+- Debian GNU/Linux 9 (stretch)
 - Temporary g1-small for free
 - Web browser based (gcloud ssh)
 - Built-in code editor BETA
@@ -57,8 +58,14 @@ gcloud alpha cloud-shell ssh
 ## Web preview
 
 - Any port from 2000 to 65000
-- Require authentication... 
-- ngrok to the rescue
+- Require authentication 
+
+
+---
+## Ngrok to the rescue
+
+![Ngrok](ngrok.png)
+
 
 ---
 ## Opening repositories / tutorials
@@ -67,6 +74,7 @@ gcloud alpha cloud-shell ssh
 - Parameters: repo, branch, working directory...
 
 [![Open in Cloud Shell](open-btn.svg)](https://console.cloud.google.com/cloudshell/editor?cloudshell_git_repo=https%3A%2F%2Fgithub.com%2Fjavilinux%2Fconferences&cloudshell_working_dir=2019%2Fhackandpaella%2F&cloudshell_tutorial=tutorial.md)
+
 
 ---
 ## Boost Mode
@@ -80,6 +88,9 @@ gcloud alpha cloud-shell ssh
 
 - Using a custom image from google container registry
 - Editing the Dockerfile
+```bash
+cloudshell launch-tutorial /google/devshell/tutorials/custom-image-tutorial.md
+```
 
 ---
 ### THANK YOU!
