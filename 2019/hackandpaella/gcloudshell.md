@@ -5,9 +5,6 @@
 *HackAndPaella February 2019*
 
 ---
-<!-- .slide: data-background="./paella.jpg" -->
-
----
 #### Topics
 
 - Overview
